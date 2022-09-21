@@ -69,7 +69,7 @@ for i in range(1,len(images)) :
         
     print(i, " ■Result: ", label, "  ■Probability: ", str(round(Score0[0,predicted_label],1)), " %" )
 
-zipname = "分類済_" +zipfile[0][:-4])    
+zipname = "分類済_" +zipfile[0][:-4]
 shutil.make_archive(zipname , 'zip', root_dir='分類済')
 print("Finish")
 
