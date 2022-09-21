@@ -15,25 +15,32 @@ import numpy as np
 import glob
 import os
 import matplotlib.pyplot as plt
+import shutil
 
+h5file=glob.glob(os.path.join("*.h5"))
+print(h5file)
 
 print(tf.__version__)
 
 class_names = ['OMOTE_Bad', 'OMOTE_Good', 'URA_Bad', 'URA_Good', 'DOUBLE']
 
-#モデル読み込み
-new_model = keras.models.load_model('/Users/toshi/Pictures/Bean/20220831_1332model_output.h5', compile=False, custom_objects=None)
+#モデル読み込み 
+h5file=glob.glob(os.path.join("*.h5"))
+if len(h5file)> 0 :
+    new_model = keras.models.load_model(h5file[0], compile=False, custom_objects=None)
+    print("h5 file is :", h5file[0])
+else:
+    new_model = keras.models.load_model('/content/BeanClassification/default.h5', compile=False, custom_objects=None)
+    print("h5 file is :default.h5")
+    
+#zipファイル解凍
+zipfile=glob.glob(os.path.join("*.zip"))
+shutil.unpack_archive(zipfile[0], 'images')
+#解凍した画像の読み込み
+images = glob.glob(os.path.join('/content/images', "*.jpg"))
+print(zipfile[0])
+print("枚数：",len(images))
 
-#モデル読み込み
-
-
-#未分類（元画像）フォルダ指定
-#images = glob.glob(os.path.join('/Volumes/UNTITLED/TEST/', "*.jpg"))
-
-#os.chdir("/Users/Toshi/PycharmProjects/TEST0001/TrainData/1906161616TEST")
-images = glob.glob(os.path.join('/Users/toshi/Pictures/Bean/good', "*.jpg"))
-#images = glob.glob(os.path.join('/Volumes/KIOXIA/photo', "*.jpg"))
-print(images)
 for i in range(1,len(images)) :
 #for i in range(1000):
     img_src = cv2.imread(images[i], cv2.IMREAD_COLOR)      #`保存用画像
