@@ -58,21 +58,21 @@ for i in range(1,len(images)) :
     UN=str(round(Score0[0,3],2))
     
     if predicted_label==0:
-        image_path = '/bad/' 
-        label = "bad"
+        image_path = 'bad/' 
+        label = "   bad"
         cv2.imwrite( image_path + str(i)+"b.jpg" , img_src)
 
     elif predicted_label==1:
-        image_path ='/good/'  
-        label = "good"
+        image_path ='good/'  
+        label = "  good"
         cv2.imwrite( image_path + str(i)+"g.jpg", img_src)
 
     elif predicted_label==4:
-        image_path = '/double/' 
+        image_path = 'double/' 
         label = "double"
         cv2.imwrite( image_path + str(i)+"d.jpg", img_src)
         
-    print(i, " Result: ", predicted_label, "Probability:  ", str(round(Score0[0,predicted_label],3)), " %" )
+    print(i, " Result: ", label, "  Probability:  ", str(round(Score0[0,predicted_label],1)), " %" )
         
 print("Finish")
 
