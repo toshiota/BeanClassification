@@ -6,7 +6,6 @@
 
 import tensorflow as tf
 from tensorflow import keras
-
 import cv2
 import time
 from keras.preprocessing.image import array_to_img, img_to_array, load_img
@@ -21,11 +20,14 @@ import shutil
 h5file=glob.glob(os.path.join("*.h5"))
 if len(h5file)> 0 :
     new_model = keras.models.load_model(h5file[0], compile=False, custom_objects=None)
-    print("h5 file is :", h5file[0])
+    h5name = h5file[0][:3]
 else:
     new_model = keras.models.load_model('/content/BeanClassification/default.h5', compile=False, custom_objects=None)
-    print("h5 file is :default.h5")
+    h5name = "default"
+
+print("h5 file is : ", h5name)
 #分類後の画像を保存するディレクトリを生成    
+os.mkdir('分類済' )
 os.mkdir('分類済/good' )
 os.mkdir('分類済/bad' )
 os.mkdir('分類済/double' )
@@ -69,7 +71,6 @@ for i in range(1,len(images)) :
         
     print(i, " ■Result: ", label, "  ■Probability: ", str(round(Score0[0,predicted_label],1)), " %" )
 
-zipname = "分類済_" +zipfile[0][:-4]
+zipname = "分類済_" +zipfile[0][:-4] + "_by_" + h5name
 shutil.make_archive(zipname , 'zip', root_dir='分類済')
 print("Finish")
-
