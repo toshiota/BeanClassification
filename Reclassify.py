@@ -20,7 +20,7 @@ import shutil
 h5file=glob.glob(os.path.join("*.h5"))
 if len(h5file)> 0 :
     new_model = keras.models.load_model(h5file[0], compile=False, custom_objects=None)
-    h5name = h5file[0][:3]
+    h5name = h5file[0][:-3]
 else:
     new_model = keras.models.load_model('/content/BeanClassification/default.h5', compile=False, custom_objects=None)
     h5name = "default"
