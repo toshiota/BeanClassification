@@ -51,12 +51,7 @@ for i in range(1,len(images)) :
     predictions_real = new_model.predict(X)        #学習データとの照合
     predicted_label = np.argmax(predictions_real)
 
-    Score0=(predictions_real * 100)
-    OO=str(round(Score0[0,0],2))
-    ON=str(round(Score0[0,1],2))
-    UO=str(round(Score0[0,2],2))
-    UN=str(round(Score0[0,3],2))
-    
+    Score0=(predictions_real * 100)   
     if predicted_label==0:
         image_path = '分類済/bad/' + str(round(Score0[0,predicted_label],0)) +"_"
         label = "   bad"
@@ -73,7 +68,8 @@ for i in range(1,len(images)) :
         cv2.imwrite( image_path + str(i)+"d.jpg", img_src)
         
     print(i, " ■Result: ", label, "  ■Probability: ", str(round(Score0[0,predicted_label],1)), " %" )
-    
-shutil.make_archive("分類済_" + zipfile[0] , 'zip'[, root_dir='分類済'])
+
+zipname = "分類済_" +zipfile[0][:-4])    
+shutil.make_archive(zipname , 'zip', root_dir='分類済')
 print("Finish")
 
