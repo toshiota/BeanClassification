@@ -17,13 +17,6 @@ import os
 import matplotlib.pyplot as plt
 import shutil
 
-h5file=glob.glob(os.path.join("*.h5"))
-print(h5file)
-
-print(tf.__version__)
-
-class_names = ['OMOTE_Bad', 'OMOTE_Good', 'URA_Bad', 'URA_Good', 'DOUBLE']
-
 #モデル読み込み 
 h5file=glob.glob(os.path.join("*.h5"))
 if len(h5file)> 0 :
@@ -37,7 +30,7 @@ else:
 zipfile=glob.glob(os.path.join("*.zip"))
 shutil.unpack_archive(zipfile[0], 'images')
 #解凍した画像の読み込み
-images = glob.glob(os.path.join('/content/images', "*.jpg"))
+images = glob.glob(os.path.join('/content/images/**', "*.jpg"))
 print(zipfile[0])
 print("枚数：",len(images))
 
