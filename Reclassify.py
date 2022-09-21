@@ -63,8 +63,8 @@ for i in range(1,len(images)) :
     print(i, predicted_label)
 
     if predicted_label==0:
-        image_path = '/0/' + str(i)+"b.jpg"
-        cv2.imwrite( image_path , img_src))
+        image_path = '/0/' 
+        cv2.imwrite( image_path + str(i)+"b.jpg" , img_src)
 
     elif predicted_label==1:
         image_path ='/1/'  
