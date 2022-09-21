@@ -26,9 +26,9 @@ else:
     new_model = keras.models.load_model('/content/BeanClassification/default.h5', compile=False, custom_objects=None)
     print("h5 file is :default.h5")
 #分類後の画像を保存するディレクトリを生成    
-os.mkdir('good' )
-os.mkdir('bad' )
-os.mkdir('double' )
+os.mkdir('分類済/good' )
+os.mkdir('分類済/bad' )
+os.mkdir('分類済/double' )
     
 #zipファイル解凍
 zipfile=glob.glob(os.path.join("*.zip"))
@@ -58,21 +58,22 @@ for i in range(1,len(images)) :
     UN=str(round(Score0[0,3],2))
     
     if predicted_label==0:
-        image_path = 'bad/' 
+        image_path = '分類済/bad/' + str(round(Score0[0,predicted_label],0)) +"_"
         label = "   bad"
         cv2.imwrite( image_path + str(i)+"b.jpg" , img_src)
 
     elif predicted_label==1:
-        image_path ='good/'  
+        image_path ='分類済/good/'  + str(round(Score0[0,predicted_label],0)) +"_"
         label = "  good"
         cv2.imwrite( image_path + str(i)+"g.jpg", img_src)
 
     elif predicted_label==4:
-        image_path = 'double/' 
+        image_path = '分類済/double/' + str(round(Score0[0,predicted_label],0)) +"_"
         label = "double"
         cv2.imwrite( image_path + str(i)+"d.jpg", img_src)
         
-    print(i, " Result: ", label, "  Probability:  ", str(round(Score0[0,predicted_label],1)), " %" )
-        
+    print(i, " ■Result: ", label, "  ■Probability: ", str(round(Score0[0,predicted_label],1)), " %" )
+    
+shutil.make_archive("分類済_" + zipfile[0] , 'zip'[, root_dir='分類済'])
 print("Finish")
 
