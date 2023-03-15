@@ -36,7 +36,7 @@ os.mkdir('分類済/double')
 zipfile = glob.glob(os.path.join("*.zip"))
 shutil.unpack_archive(zipfile[0], 'images')
 # 解凍した画像の読み込み
-images = glob.glob(os.path.join('/content/images' , “**/*.jpg”), recursive=True)
+images = glob.glob(os.path.join('/content/images' , '**/*.jpg'), recursive=True)
 print(zipfile[0])
 print("枚数：", len(images))
 
