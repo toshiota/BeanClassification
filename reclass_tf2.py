@@ -45,7 +45,7 @@ for i in range(1, len(images)):
     img_src = cv2.imread(images[i], cv2.IMREAD_COLOR)  # `保存用画像
 
     img = tf.keras.utils.img_to_array(
-        tf.keras.utils.load_img(images[i], grayscale=False, target_size=(128, 128)))  # 処理用画像  , interpolation = 'nearest'
+        tf.keras.utils.load_img(images[i],color_mode='rgb', target_size=(128, 128)))  # 処理用画像  , interpolation = 'nearest'
     X = []
     X.append(img)
     X = np.asarray(img) / 255.0
